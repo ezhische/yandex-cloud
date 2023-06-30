@@ -20,9 +20,7 @@ packages:
   - zstd
   - jq
 runcmd:
-  - fsfreeze --freeze /
-  - dd if=/dev/vda bs=4M |pv|zstd -1 |rclone --s3-chunk-size=1G --s3-upload-concurrency 8 --s3-max-upload-parts 1000000 rcat s3:${BUCKET_NAME}/$(date '+%Y%m%d%H%M%S').zst
-  - fsfreeze --unfreeze /
+  - dd if=/dev/vdb bs=4M |pv|zstd -1 |rclone --s3-chunk-size=1G --s3-upload-concurrency 8 --s3-max-upload-parts 1000000 rcat s3:${BUCKET_NAME}/$(date '+%Y%m%d%H%M%S').zst
   - sleep 60
   - 'IAM_TOKEN=$(curl --connect-timeout 1 -s -H "Metadata-Flavor: Google" http://169.254.169.254/computeMetadata/v1/instance/service-accounts/default/token | jq ".access_token" -r)'
   - 'INSTANCE_ID=$(curl --connect-timeout 1 -s -H "Metadata-Flavor: Google" http://169.254.169.254/computeMetadata/v1/instance/id)'
