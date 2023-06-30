@@ -25,3 +25,5 @@ runcmd:
   - 'IAM_TOKEN=$(curl --connect-timeout 1 -s -H "Metadata-Flavor: Google" http://169.254.169.254/computeMetadata/v1/instance/service-accounts/default/token | jq ".access_token" -r)'
   - 'INSTANCE_ID=$(curl --connect-timeout 1 -s -H "Metadata-Flavor: Google" http://169.254.169.254/computeMetadata/v1/instance/id)'
   - 'curl -X DELETE https://compute.api.cloud.yandex.net/compute/v1/instances/$INSTANCE_ID -H "Authorization: Bearer ${$IAM_TOKEN}" -H "Content-type: application/json"'
+disk_setup: false
+mounts: false
