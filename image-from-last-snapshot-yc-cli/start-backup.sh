@@ -9,7 +9,8 @@ yc compute instance create \
   --metadata-from-file user-data=cloudconfig.yaml \
   --metadata serial-port-enable=1 \
   --zone ru-central1-b \
-  --create-boot-disk snapshot-id=$ID,type=network-nvme \
+  --create-boot-disk image-id=fd87bs5724r0ngu3jlb6,type=network-hdd,size=32 \
+  --create-disk snapshot-id=$ID,type=network-hdd \
   --memory 16 --cores 4 --core-fraction 100 \
   --network-interface subnet-id=$SUBNET_ID,nat-ip-version=ipv4 \
   --service-account-id=$SA_ID \
